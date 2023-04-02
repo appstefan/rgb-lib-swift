@@ -19,13 +19,13 @@ fileprivate extension RustBuffer {
     }
 
     static func from(_ ptr: UnsafeBufferPointer<UInt8>) -> RustBuffer {
-        try! rustCall { ffi_rgb_lib_5ddd_rustbuffer_from_bytes(ForeignBytes(bufferPointer: ptr), $0) }
+        try! rustCall { ffi_rgb_lib_45ae_rustbuffer_from_bytes(ForeignBytes(bufferPointer: ptr), $0) }
     }
 
     // Frees the buffer in place.
     // The buffer must not be used after this is called.
     func deallocate() {
-        try! rustCall { ffi_rgb_lib_5ddd_rustbuffer_free(self, $0) }
+        try! rustCall { ffi_rgb_lib_45ae_rustbuffer_free(self, $0) }
     }
 }
 
@@ -423,13 +423,13 @@ public class BlindedUtxo: BlindedUTXOProtocol {
     
     rustCallWithError(FfiConverterTypeRgbLibError.self) {
     
-    rgb_lib_5ddd_BlindedUTXO_new(
+    rgb_lib_45ae_BlindedUTXO_new(
         FfiConverterString.lower(`blindedUtxo`), $0)
 })
     }
 
     deinit {
-        try! rustCall { ffi_rgb_lib_5ddd_BlindedUTXO_object_free(pointer, $0) }
+        try! rustCall { ffi_rgb_lib_45ae_BlindedUTXO_object_free(pointer, $0) }
     }
 
     
@@ -471,7 +471,7 @@ public struct FfiConverterTypeBlindedUtxo: FfiConverter {
 
 
 public protocol ConsignmentEndpointProtocol {
-    func `protocol`()  -> ConsignmentEndpointProtocol
+    func `protocol`()  -> ConsignmentEndpointProtocolType
     
 }
 
@@ -489,24 +489,24 @@ public class ConsignmentEndpoint: ConsignmentEndpointProtocol {
     
     rustCallWithError(FfiConverterTypeRgbLibError.self) {
     
-    rgb_lib_5ddd_ConsignmentEndpoint_new(
+    rgb_lib_45ae_ConsignmentEndpoint_new(
         FfiConverterString.lower(`consignmentEndpoint`), $0)
 })
     }
 
     deinit {
-        try! rustCall { ffi_rgb_lib_5ddd_ConsignmentEndpoint_object_free(pointer, $0) }
+        try! rustCall { ffi_rgb_lib_45ae_ConsignmentEndpoint_object_free(pointer, $0) }
     }
 
     
 
     
-    public func `protocol`()  -> ConsignmentEndpointProtocol {
-        return try! FfiConverterTypeConsignmentEndpointProtocol.lift(
+    public func `protocol`()  -> ConsignmentEndpointProtocolType {
+        return try! FfiConverterTypeConsignmentEndpointProtocolType.lift(
             try!
     rustCall() {
     
-    rgb_lib_5ddd_ConsignmentEndpoint_protocol(self.pointer, $0
+    rgb_lib_45ae_ConsignmentEndpoint_protocol(self.pointer, $0
     )
 }
         )
@@ -566,13 +566,13 @@ public class Invoice: InvoiceProtocol {
     
     rustCallWithError(FfiConverterTypeRgbLibError.self) {
     
-    rgb_lib_5ddd_Invoice_new(
+    rgb_lib_45ae_Invoice_new(
         FfiConverterString.lower(`bech32Invoice`), $0)
 })
     }
 
     deinit {
-        try! rustCall { ffi_rgb_lib_5ddd_Invoice_object_free(pointer, $0) }
+        try! rustCall { ffi_rgb_lib_45ae_Invoice_object_free(pointer, $0) }
     }
 
     
@@ -581,7 +581,7 @@ public class Invoice: InvoiceProtocol {
     
     rustCallWithError(FfiConverterTypeRgbLibError.self) {
     
-    rgb_lib_5ddd_Invoice_from_invoice_data(
+    rgb_lib_45ae_Invoice_from_invoice_data(
         FfiConverterTypeInvoiceData.lower(`invoiceData`), $0)
 })
     }
@@ -593,7 +593,7 @@ public class Invoice: InvoiceProtocol {
             try!
     rustCall() {
     
-    rgb_lib_5ddd_Invoice_invoice_data(self.pointer, $0
+    rgb_lib_45ae_Invoice_invoice_data(self.pointer, $0
     )
 }
         )
@@ -603,7 +603,7 @@ public class Invoice: InvoiceProtocol {
             try!
     rustCall() {
     
-    rgb_lib_5ddd_Invoice_bech32_invoice(self.pointer, $0
+    rgb_lib_45ae_Invoice_bech32_invoice(self.pointer, $0
     )
 }
         )
@@ -683,13 +683,13 @@ public class Wallet: WalletProtocol {
     
     rustCallWithError(FfiConverterTypeRgbLibError.self) {
     
-    rgb_lib_5ddd_Wallet_new(
+    rgb_lib_45ae_Wallet_new(
         FfiConverterTypeWalletData.lower(`walletData`), $0)
 })
     }
 
     deinit {
-        try! rustCall { ffi_rgb_lib_5ddd_Wallet_object_free(pointer, $0) }
+        try! rustCall { ffi_rgb_lib_45ae_Wallet_object_free(pointer, $0) }
     }
 
     
@@ -699,7 +699,7 @@ public class Wallet: WalletProtocol {
         return try FfiConverterTypeBlindData.lift(
             try
     rustCallWithError(FfiConverterTypeRgbLibError.self) {
-    rgb_lib_5ddd_Wallet_blind(self.pointer, 
+    rgb_lib_45ae_Wallet_blind(self.pointer, 
         FfiConverterOptionString.lower(`assetId`), 
         FfiConverterOptionUInt64.lower(`amount`), 
         FfiConverterOptionUInt32.lower(`durationSeconds`), 
@@ -712,7 +712,7 @@ public class Wallet: WalletProtocol {
         return try FfiConverterUInt8.lift(
             try
     rustCallWithError(FfiConverterTypeRgbLibError.self) {
-    rgb_lib_5ddd_Wallet_create_utxos(self.pointer, 
+    rgb_lib_45ae_Wallet_create_utxos(self.pointer, 
         FfiConverterTypeOnline.lower(`online`), 
         FfiConverterBool.lower(`upTo`), 
         FfiConverterOptionUInt8.lower(`num`), 
@@ -726,7 +726,7 @@ public class Wallet: WalletProtocol {
         return try FfiConverterString.lift(
             try
     rustCallWithError(FfiConverterTypeRgbLibError.self) {
-    rgb_lib_5ddd_Wallet_create_utxos_begin(self.pointer, 
+    rgb_lib_45ae_Wallet_create_utxos_begin(self.pointer, 
         FfiConverterTypeOnline.lower(`online`), 
         FfiConverterBool.lower(`upTo`), 
         FfiConverterOptionUInt8.lower(`num`), 
@@ -740,7 +740,7 @@ public class Wallet: WalletProtocol {
         return try FfiConverterUInt8.lift(
             try
     rustCallWithError(FfiConverterTypeRgbLibError.self) {
-    rgb_lib_5ddd_Wallet_create_utxos_end(self.pointer, 
+    rgb_lib_45ae_Wallet_create_utxos_end(self.pointer, 
         FfiConverterTypeOnline.lower(`online`), 
         FfiConverterString.lower(`signedPsbt`), $0
     )
@@ -751,7 +751,7 @@ public class Wallet: WalletProtocol {
         return try FfiConverterBool.lift(
             try
     rustCallWithError(FfiConverterTypeRgbLibError.self) {
-    rgb_lib_5ddd_Wallet_delete_transfers(self.pointer, 
+    rgb_lib_45ae_Wallet_delete_transfers(self.pointer, 
         FfiConverterOptionString.lower(`blindedUtxo`), 
         FfiConverterOptionString.lower(`txid`), 
         FfiConverterBool.lower(`noAssetOnly`), $0
@@ -763,7 +763,7 @@ public class Wallet: WalletProtocol {
         return try FfiConverterString.lift(
             try
     rustCallWithError(FfiConverterTypeRgbLibError.self) {
-    rgb_lib_5ddd_Wallet_drain_to(self.pointer, 
+    rgb_lib_45ae_Wallet_drain_to(self.pointer, 
         FfiConverterTypeOnline.lower(`online`), 
         FfiConverterString.lower(`address`), 
         FfiConverterBool.lower(`destroyAssets`), 
@@ -776,7 +776,7 @@ public class Wallet: WalletProtocol {
         return try FfiConverterString.lift(
             try
     rustCallWithError(FfiConverterTypeRgbLibError.self) {
-    rgb_lib_5ddd_Wallet_drain_to_begin(self.pointer, 
+    rgb_lib_45ae_Wallet_drain_to_begin(self.pointer, 
         FfiConverterTypeOnline.lower(`online`), 
         FfiConverterString.lower(`address`), 
         FfiConverterBool.lower(`destroyAssets`), 
@@ -789,7 +789,7 @@ public class Wallet: WalletProtocol {
         return try FfiConverterString.lift(
             try
     rustCallWithError(FfiConverterTypeRgbLibError.self) {
-    rgb_lib_5ddd_Wallet_drain_to_end(self.pointer, 
+    rgb_lib_45ae_Wallet_drain_to_end(self.pointer, 
         FfiConverterTypeOnline.lower(`online`), 
         FfiConverterString.lower(`signedPsbt`), $0
     )
@@ -800,7 +800,7 @@ public class Wallet: WalletProtocol {
         return try FfiConverterBool.lift(
             try
     rustCallWithError(FfiConverterTypeRgbLibError.self) {
-    rgb_lib_5ddd_Wallet_fail_transfers(self.pointer, 
+    rgb_lib_45ae_Wallet_fail_transfers(self.pointer, 
         FfiConverterTypeOnline.lower(`online`), 
         FfiConverterOptionString.lower(`blindedUtxo`), 
         FfiConverterOptionString.lower(`txid`), 
@@ -814,7 +814,7 @@ public class Wallet: WalletProtocol {
             try!
     rustCall() {
     
-    rgb_lib_5ddd_Wallet_get_address(self.pointer, $0
+    rgb_lib_45ae_Wallet_get_address(self.pointer, $0
     )
 }
         )
@@ -823,7 +823,7 @@ public class Wallet: WalletProtocol {
         return try FfiConverterTypeBalance.lift(
             try
     rustCallWithError(FfiConverterTypeRgbLibError.self) {
-    rgb_lib_5ddd_Wallet_get_asset_balance(self.pointer, 
+    rgb_lib_45ae_Wallet_get_asset_balance(self.pointer, 
         FfiConverterString.lower(`assetId`), $0
     )
 }
@@ -833,7 +833,7 @@ public class Wallet: WalletProtocol {
         return try FfiConverterTypeMetadata.lift(
             try
     rustCallWithError(FfiConverterTypeRgbLibError.self) {
-    rgb_lib_5ddd_Wallet_get_asset_metadata(self.pointer, 
+    rgb_lib_45ae_Wallet_get_asset_metadata(self.pointer, 
         FfiConverterTypeOnline.lower(`online`), 
         FfiConverterString.lower(`assetId`), $0
     )
@@ -844,7 +844,7 @@ public class Wallet: WalletProtocol {
         return try FfiConverterTypeOnline.lift(
             try
     rustCallWithError(FfiConverterTypeRgbLibError.self) {
-    rgb_lib_5ddd_Wallet_go_online(self.pointer, 
+    rgb_lib_45ae_Wallet_go_online(self.pointer, 
         FfiConverterBool.lower(`skipConsistencyCheck`), 
         FfiConverterString.lower(`electrumUrl`), $0
     )
@@ -855,7 +855,7 @@ public class Wallet: WalletProtocol {
         return try FfiConverterTypeAssetRgb20.lift(
             try
     rustCallWithError(FfiConverterTypeRgbLibError.self) {
-    rgb_lib_5ddd_Wallet_issue_asset_rgb20(self.pointer, 
+    rgb_lib_45ae_Wallet_issue_asset_rgb20(self.pointer, 
         FfiConverterTypeOnline.lower(`online`), 
         FfiConverterString.lower(`ticker`), 
         FfiConverterString.lower(`name`), 
@@ -869,7 +869,7 @@ public class Wallet: WalletProtocol {
         return try FfiConverterTypeAssetRgb121.lift(
             try
     rustCallWithError(FfiConverterTypeRgbLibError.self) {
-    rgb_lib_5ddd_Wallet_issue_asset_rgb121(self.pointer, 
+    rgb_lib_45ae_Wallet_issue_asset_rgb121(self.pointer, 
         FfiConverterTypeOnline.lower(`online`), 
         FfiConverterString.lower(`name`), 
         FfiConverterOptionString.lower(`description`), 
@@ -885,7 +885,7 @@ public class Wallet: WalletProtocol {
         return try FfiConverterTypeAssets.lift(
             try
     rustCallWithError(FfiConverterTypeRgbLibError.self) {
-    rgb_lib_5ddd_Wallet_list_assets(self.pointer, 
+    rgb_lib_45ae_Wallet_list_assets(self.pointer, 
         FfiConverterSequenceTypeAssetType.lower(`filterAssetTypes`), $0
     )
 }
@@ -895,7 +895,7 @@ public class Wallet: WalletProtocol {
         return try FfiConverterSequenceTypeTransfer.lift(
             try
     rustCallWithError(FfiConverterTypeRgbLibError.self) {
-    rgb_lib_5ddd_Wallet_list_transfers(self.pointer, 
+    rgb_lib_45ae_Wallet_list_transfers(self.pointer, 
         FfiConverterString.lower(`assetId`), $0
     )
 }
@@ -905,7 +905,7 @@ public class Wallet: WalletProtocol {
         return try FfiConverterSequenceTypeUnspent.lift(
             try
     rustCallWithError(FfiConverterTypeRgbLibError.self) {
-    rgb_lib_5ddd_Wallet_list_unspents(self.pointer, 
+    rgb_lib_45ae_Wallet_list_unspents(self.pointer, 
         FfiConverterBool.lower(`settledOnly`), $0
     )
 }
@@ -915,7 +915,7 @@ public class Wallet: WalletProtocol {
         return try FfiConverterBool.lift(
             try
     rustCallWithError(FfiConverterTypeRgbLibError.self) {
-    rgb_lib_5ddd_Wallet_refresh(self.pointer, 
+    rgb_lib_45ae_Wallet_refresh(self.pointer, 
         FfiConverterTypeOnline.lower(`online`), 
         FfiConverterOptionString.lower(`assetId`), 
         FfiConverterSequenceTypeRefreshFilter.lower(`filter`), $0
@@ -927,7 +927,7 @@ public class Wallet: WalletProtocol {
         return try FfiConverterString.lift(
             try
     rustCallWithError(FfiConverterTypeRgbLibError.self) {
-    rgb_lib_5ddd_Wallet_send(self.pointer, 
+    rgb_lib_45ae_Wallet_send(self.pointer, 
         FfiConverterTypeOnline.lower(`online`), 
         FfiConverterDictionaryStringSequenceTypeRecipient.lower(`recipientMap`), 
         FfiConverterBool.lower(`donation`), 
@@ -940,7 +940,7 @@ public class Wallet: WalletProtocol {
         return try FfiConverterString.lift(
             try
     rustCallWithError(FfiConverterTypeRgbLibError.self) {
-    rgb_lib_5ddd_Wallet_send_begin(self.pointer, 
+    rgb_lib_45ae_Wallet_send_begin(self.pointer, 
         FfiConverterTypeOnline.lower(`online`), 
         FfiConverterDictionaryStringSequenceTypeRecipient.lower(`recipientMap`), 
         FfiConverterBool.lower(`donation`), 
@@ -953,7 +953,7 @@ public class Wallet: WalletProtocol {
         return try FfiConverterString.lift(
             try
     rustCallWithError(FfiConverterTypeRgbLibError.self) {
-    rgb_lib_5ddd_Wallet_send_end(self.pointer, 
+    rgb_lib_45ae_Wallet_send_end(self.pointer, 
         FfiConverterTypeOnline.lower(`online`), 
         FfiConverterString.lower(`signedPsbt`), $0
     )
@@ -1959,12 +1959,12 @@ public struct FfiConverterTypeTransfer: FfiConverterRustBuffer {
 
 public struct TransferConsignmentEndpoint {
     public var `endpoint`: String
-    public var `protocol`: ConsignmentEndpointProtocol
+    public var `protocol`: ConsignmentEndpointProtocolType
     public var `used`: Bool
 
     // Default memberwise initializers are never public by default, so we
     // declare one manually.
-    public init(`endpoint`: String, `protocol`: ConsignmentEndpointProtocol, `used`: Bool) {
+    public init(`endpoint`: String, `protocol`: ConsignmentEndpointProtocolType, `used`: Bool) {
         self.`endpoint` = `endpoint`
         self.`protocol` = `protocol`
         self.`used` = `used`
@@ -1998,14 +1998,14 @@ public struct FfiConverterTypeTransferConsignmentEndpoint: FfiConverterRustBuffe
     public static func read(from buf: inout (data: Data, offset: Data.Index)) throws -> TransferConsignmentEndpoint {
         return try TransferConsignmentEndpoint(
             `endpoint`: FfiConverterString.read(from: &buf), 
-            `protocol`: FfiConverterTypeConsignmentEndpointProtocol.read(from: &buf), 
+            `protocol`: FfiConverterTypeConsignmentEndpointProtocolType.read(from: &buf), 
             `used`: FfiConverterBool.read(from: &buf)
         )
     }
 
     public static func write(_ value: TransferConsignmentEndpoint, into buf: inout [UInt8]) {
         FfiConverterString.write(value.`endpoint`, into: &buf)
-        FfiConverterTypeConsignmentEndpointProtocol.write(value.`protocol`, into: &buf)
+        FfiConverterTypeConsignmentEndpointProtocolType.write(value.`protocol`, into: &buf)
         FfiConverterBool.write(value.`used`, into: &buf)
     }
 }
@@ -2280,16 +2280,16 @@ extension BitcoinNetwork: Equatable, Hashable {}
 
 // Note that we don't yet support `indirect` for enums.
 // See https://github.com/mozilla/uniffi-rs/issues/396 for further discussion.
-public enum ConsignmentEndpointProtocol {
+public enum ConsignmentEndpointProtocolType {
     
     case `storm`
     case `rgbHttpJsonRpc`
 }
 
-public struct FfiConverterTypeConsignmentEndpointProtocol: FfiConverterRustBuffer {
-    typealias SwiftType = ConsignmentEndpointProtocol
+public struct FfiConverterTypeConsignmentEndpointProtocolType: FfiConverterRustBuffer {
+    typealias SwiftType = ConsignmentEndpointProtocolType
 
-    public static func read(from buf: inout (data: Data, offset: Data.Index)) throws -> ConsignmentEndpointProtocol {
+    public static func read(from buf: inout (data: Data, offset: Data.Index)) throws -> ConsignmentEndpointProtocolType {
         let variant: Int32 = try readInt(&buf)
         switch variant {
         
@@ -2301,7 +2301,7 @@ public struct FfiConverterTypeConsignmentEndpointProtocol: FfiConverterRustBuffe
         }
     }
 
-    public static func write(_ value: ConsignmentEndpointProtocol, into buf: inout [UInt8]) {
+    public static func write(_ value: ConsignmentEndpointProtocolType, into buf: inout [UInt8]) {
         switch value {
         
         
@@ -2317,7 +2317,7 @@ public struct FfiConverterTypeConsignmentEndpointProtocol: FfiConverterRustBuffe
 }
 
 
-extension ConsignmentEndpointProtocol: Equatable, Hashable {}
+extension ConsignmentEndpointProtocolType: Equatable, Hashable {}
 
 
 // Note that we don't yet support `indirect` for enums.
@@ -3371,7 +3371,7 @@ public func `generateKeys`(`bitcoinNetwork`: BitcoinNetwork)  -> Keys {
     
     rustCall() {
     
-    rgb_lib_5ddd_generate_keys(
+    rgb_lib_45ae_generate_keys(
         FfiConverterTypeBitcoinNetwork.lower(`bitcoinNetwork`), $0)
 }
     )
@@ -3385,7 +3385,7 @@ public func `restoreKeys`(`bitcoinNetwork`: BitcoinNetwork, `mnemonic`: String) 
     
     rustCallWithError(FfiConverterTypeRgbLibError.self) {
     
-    rgb_lib_5ddd_restore_keys(
+    rgb_lib_45ae_restore_keys(
         FfiConverterTypeBitcoinNetwork.lower(`bitcoinNetwork`), 
         FfiConverterString.lower(`mnemonic`), $0)
 }
